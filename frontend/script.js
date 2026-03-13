@@ -3,7 +3,7 @@ const userInput = document.getElementById('user-input');
 const sendBtn = document.getElementById('send-btn');
 let hasSentMessage = false;
 
-const thread_id = Math.random().toString(36).substring(7);
+let thread_id = Math.random().toString(36).substring(7);
 
 function hideWelcomeScreen() {
     const welcomeScreen = document.getElementById('welcome-screen');
@@ -11,6 +11,24 @@ function hideWelcomeScreen() {
         welcomeScreen.style.display = 'none';
         hasSentMessage = true;
     }
+}
+
+function resetChat() {
+    // Remove all dynamically added messages
+    const messages = document.querySelectorAll('.message');
+    messages.forEach(msg => msg.remove());
+    
+    // Show welcome screen again
+    const welcomeScreen = document.getElementById('welcome-screen');
+    if (welcomeScreen) {
+        welcomeScreen.style.display = 'flex';
+    }
+    
+    // Reset state
+    hasSentMessage = false;
+    
+    // Generate new thread ID to clear the AI's memory context
+    thread_id = Math.random().toString(36).substring(7);
 }
 
 function addMessage(text, sender) {
