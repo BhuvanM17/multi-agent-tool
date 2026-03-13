@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Agent - Multi-Agent Tool</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <span class="icon">✈️</span>
+                <h1>Travel<span>Assistant</span></h1>
+            </div>
+            <div class="status">
+                <span class="status-dot"></span> Online
+            </div>
+        </header>
+
+        <main class="chat-area" id="chat-messages">
+            <div class="message assistant">
+                <div class="message-content">
+                    Hello! I'm your AI Travel Assistant. I can help you check flight prices, weather, or book a trip. How can I help you today?
+                </div>
+            </div>
+        </main>
+
+        <footer class="input-area">
+            <div class="input-container">
+                <input type="text" id="user-input" placeholder="Ask about flights, weather, or booking..." autocomplete="off">
+                <button id="send-btn">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
