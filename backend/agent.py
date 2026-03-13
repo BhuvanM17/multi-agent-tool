@@ -61,26 +61,27 @@ agent = graph_builder.compile(checkpointer=memory)
 def run_agent(input_text: str, thread_id: str = "1"):
     """Run the agent with the given input text."""
     config = {"configurable": {"thread_id": thread_id}}
+    
+    # We can just use the memory checkpointer properly to manage the state
+    # Create the state dictionary starting from the input
     initial_state = {"messages": [HumanMessage(content=input_text)]}
     
     final_content = ""
-    # Process the stream to get intermediate steps and final result
-    for event in agent.stream(initial_state, config):
-        for node, output in event.items():
-            if "messages" in output:
-                for msg in output["messages"]:
-                    if isinstance(msg, AIMessage) and msg.content:
-                        content = msg.content
-                        if isinstance(content, str):
-                            final_content = content
-                        elif isinstance(content, list):
-                            # Extract text from message parts
-                            text_parts = []
-                            for part in content:
-                                if isinstance(part, dict) and part.get("type") == "text":
-                                    text_parts.append(part.get("text", ""))
-                                elif isinstance(part, str):
-                                    text_parts.append(part)
-                            final_content = " ".join(text_parts)
-    
-    return final_content.strip() or "I processed your request."
+    try:
+        # Run the graph and get the final state
+        # The stream method yields dictionary objects for the outputs of nodes as they complete
+        # We can just iterate to the end, or use invoke for synchronous execution
+        response_state = agent.invoke(initial_state, config)
+        
+        # The last message in the 'messages' list of the state should be the AI's final answer
+        messages = response_state.get("messages", [])
+        if messages:
+            last_msg = messages[-1]
+            if isinstance(last_msg, AIMessage):
+                final_content = last_msg.content
+    except Exception as e:
+        print(f"Error during agent execution: {e}")
+        import traceback
+        traceback.print_exc()
+        
+    return final_content or "I processed your request, but there was no explicit textual response."
