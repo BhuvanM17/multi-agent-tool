@@ -51,8 +51,13 @@ async function sendMessage() {
     // Show typing indicator
     showTypingIndicator();
 
+    // Determine the backend URL based on the current environment
+    const BACKEND_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+        ? 'http://localhost:8000' 
+        : 'https://bizzai-backend.onrender.com'; // Change this to your actual Render URL later if different
+
     try {
-        const response = await fetch('http://localhost:8000/chat', {
+        const response = await fetch(`${BACKEND_URL}/chat`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -61,6 +66,7 @@ async function sendMessage() {
                 message: message,
                 thread_id: thread_id
             }),
+
         });
 
         if (!response.ok) {
