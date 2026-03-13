@@ -20,9 +20,44 @@
         </header>
 
         <main class="chat-area" id="chat-messages">
-            <div class="message assistant">
-                <div class="message-content">
-                    Hello! I'm your AI Travel Assistant. I can help you check flight prices, weather, or book a trip. How can I help you today?
+            <div id="welcome-screen" class="welcome-screen">
+                <div class="welcome-header">
+                    <h2>Welcome to Namma Bengaluru Travel Assistant 🛺</h2>
+                    <p>Your AI companion for finding rides, checking weather, and trip planning.</p>
+                </div>
+                
+                <div class="suggestions-grid">
+                    <button class="suggestion-btn" onclick="insertAndSend('What is the weather in Whitefield today?')">
+                        <span class="emoji">🌤️</span>
+                        <div class="suggestion-text">
+                            <strong>Check Weather</strong>
+                            <span>What is the weather in Whitefield today?</span>
+                        </div>
+                    </button>
+                    
+                    <button class="suggestion-btn" onclick="insertAndSend('Book a ticket from MG Road to Electronic City for Bhuvan')">
+                        <span class="emoji">🎫</span>
+                        <div class="suggestion-text">
+                            <strong>Book a Ride</strong>
+                            <span>Book a ticket from MG Road to Electronic City for Bhuvan</span>
+                        </div>
+                    </button>
+                    
+                    <button class="suggestion-btn" onclick="insertAndSend('How much is the trip to Marathahalli?')">
+                        <span class="emoji">💰</span>
+                        <div class="suggestion-text">
+                            <strong>Check Prices</strong>
+                            <span>How much is the trip to Marathahalli?</span>
+                        </div>
+                    </button>
+                    
+                    <button class="suggestion-btn" onclick="insertAndSend('Show me all available destinations')">
+                        <span class="emoji">📍</span>
+                        <div class="suggestion-text">
+                            <strong>Explore Destinations</strong>
+                            <span>Show me all available destinations</span>
+                        </div>
+                    </button>
                 </div>
             </div>
         </main>

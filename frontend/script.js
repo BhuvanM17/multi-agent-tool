@@ -1,10 +1,21 @@
 const chatMessages = document.getElementById('chat-messages');
 const userInput = document.getElementById('user-input');
 const sendBtn = document.getElementById('send-btn');
+let hasSentMessage = false;
 
 const thread_id = Math.random().toString(36).substring(7);
 
+function hideWelcomeScreen() {
+    const welcomeScreen = document.getElementById('welcome-screen');
+    if (welcomeScreen && !hasSentMessage) {
+        welcomeScreen.style.display = 'none';
+        hasSentMessage = true;
+    }
+}
+
 function addMessage(text, sender) {
+    hideWelcomeScreen();
+    
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message', sender);
     
@@ -19,6 +30,8 @@ function addMessage(text, sender) {
 }
 
 function showTypingIndicator() {
+    hideWelcomeScreen();
+    
     const indicator = document.createElement('div');
     indicator.classList.add('message', 'assistant', 'typing');
     indicator.id = 'typing-indicator';
@@ -36,6 +49,12 @@ function showTypingIndicator() {
 function removeTypingIndicator() {
     const indicator = document.getElementById('typing-indicator');
     if (indicator) indicator.remove();
+}
+
+// Function triggered by clicking the Quick Action suggestion pills
+function insertAndSend(text) {
+    userInput.value = text;
+    sendMessage();
 }
 
 async function sendMessage() {
