@@ -54,7 +54,7 @@ async function sendMessage() {
     // Determine the backend URL based on the current environment
     const BACKEND_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
         ? 'http://localhost:8000' 
-        : 'https://bizzai-backend.onrender.com'; // Change this to your actual Render URL later if different
+        : 'https://multi-agent-tool.onrender.com';
 
     try {
         const response = await fetch(`${BACKEND_URL}/chat`, {
